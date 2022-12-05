@@ -1,0 +1,39 @@
+﻿<Window x:Class="Library.ClientMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="ClientMenu" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Получить книги">
+                <DataGrid IsReadOnly="True" x:Name="bookDG" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название книги" Binding="{Binding Name_b}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Жанр" Binding="{Binding Type_book.Name_t}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Автор" Binding="{Binding Author.Name_a}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Tag="{Binding ID_b}" Click="Button_Click">Получить</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Мои книги">
+                <DataGrid IsReadOnly="True" x:Name="bookMyDG" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название книги" Binding="{Binding Book.Name_b}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Жанр" Binding="{Binding Book.Type_book.Name_t}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Автор" Binding="{Binding Book.Author.Name_a}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Дата получения" Binding="{Binding Date_a}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

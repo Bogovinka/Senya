@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseLibModelContainer" CdmEntityContainer="DatabaseLibEntities">
+    <EntitySetMapping Name="Accounting">
+      <EntityTypeMapping TypeName="DatabaseLibModel.Accounting">
+        <MappingFragment StoreEntitySet="Accounting">
+          <ScalarProperty Name="ID_a" ColumnName="ID_a" />
+          <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+          <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+          <ScalarProperty Name="Date_a" ColumnName="Date_a" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Author">
+      <EntityTypeMapping TypeName="DatabaseLibModel.Author">
+        <MappingFragment StoreEntitySet="Author">
+          <ScalarProperty Name="ID_a" ColumnName="ID_a" />
+          <ScalarProperty Name="Name_a" ColumnName="Name_a" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Book">
+      <EntityTypeMapping TypeName="DatabaseLibModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="ID_b" ColumnName="ID_b" />
+          <ScalarProperty Name="Name_b" ColumnName="Name_b" />
+          <ScalarProperty Name="Type_book_id" ColumnName="Type_book_id" />
+          <ScalarProperty Name="Author_id" ColumnName="Author_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="DatabaseLibModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ID_c" ColumnName="ID_c" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name_c" ColumnName="Name_c" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type_book">
+      <EntityTypeMapping TypeName="DatabaseLibModel.Type_book">
+        <MappingFragment StoreEntitySet="Type_book">
+          <ScalarProperty Name="ID_t" ColumnName="ID_t" />
+          <ScalarProperty Name="Name_t" ColumnName="Name_t" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

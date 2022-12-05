@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DatabaseLibModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounting">
+    <Key>
+      <PropertyRef Name="ID_a" />
+    </Key>
+    <Property Name="ID_a" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Book_id" Type="int" />
+    <Property Name="Client_id" Type="int" />
+    <Property Name="Date_a" Type="date" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="ID_a" />
+    </Key>
+    <Property Name="ID_a" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name_a" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ID_b" />
+    </Key>
+    <Property Name="ID_b" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name_b" Type="nvarchar" MaxLength="250" />
+    <Property Name="Type_book_id" Type="int" />
+    <Property Name="Author_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID_c" />
+    </Key>
+    <Property Name="ID_c" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="250" />
+    <Property Name="Name_c" Type="nvarchar" MaxLength="250" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="250" />
+    <Property Name="Login" Type="nvarchar" MaxLength="250" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Type_book">
+    <Key>
+      <PropertyRef Name="ID_t" />
+    </Key>
+    <Property Name="ID_t" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name_t" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <Association Name="FK__Accountin__Book___403A8C7D">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID_b" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="Book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Accountin__Clien__412EB0B6">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID_c" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="Client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__Author_id__3D5E1FD2">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="ID_a" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__Type_book___3C69FB99">
+    <End Role="Type_book" Type="Self.Type_book" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type_book">
+        <PropertyRef Name="ID_t" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Type_book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DatabaseLibModelContainer">
+    <EntitySet Name="Accounting" EntityType="Self.Accounting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type_book" EntityType="Self.Type_book" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Accountin__Book___403A8C7D" Association="Self.FK__Accountin__Book___403A8C7D">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Accounting" EntitySet="Accounting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Accountin__Clien__412EB0B6" Association="Self.FK__Accountin__Clien__412EB0B6">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Accounting" EntitySet="Accounting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__Author_id__3D5E1FD2" Association="Self.FK__Book__Author_id__3D5E1FD2">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__Type_book___3C69FB99" Association="Self.FK__Book__Type_book___3C69FB99">
+      <End Role="Type_book" EntitySet="Type_book" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

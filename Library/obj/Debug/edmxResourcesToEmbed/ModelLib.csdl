@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseLibModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accounting">
+    <Key>
+      <PropertyRef Name="ID_a" />
+    </Key>
+    <Property Name="ID_a" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_id" Type="Int32" />
+    <Property Name="Client_id" Type="Int32" />
+    <Property Name="Date_a" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Accountin__Book___403A8C7D" FromRole="Accounting" ToRole="Book" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Accountin__Clien__412EB0B6" FromRole="Accounting" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="ID_a" />
+    </Key>
+    <Property Name="ID_a" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name_a" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Book__Author_id__3D5E1FD2" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ID_b" />
+    </Key>
+    <Property Name="ID_b" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name_b" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Type_book_id" Type="Int32" />
+    <Property Name="Author_id" Type="Int32" />
+    <NavigationProperty Name="Accounting" Relationship="Self.FK__Accountin__Book___403A8C7D" FromRole="Book" ToRole="Accounting" />
+    <NavigationProperty Name="Author" Relationship="Self.FK__Book__Author_id__3D5E1FD2" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Type_book" Relationship="Self.FK__Book__Type_book___3C69FB99" FromRole="Book" ToRole="Type_book" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID_c" />
+    </Key>
+    <Property Name="ID_c" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Name_c" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Accounting" Relationship="Self.FK__Accountin__Clien__412EB0B6" FromRole="Client" ToRole="Accounting" />
+  </EntityType>
+  <EntityType Name="Type_book">
+    <Key>
+      <PropertyRef Name="ID_t" />
+    </Key>
+    <Property Name="ID_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name_t" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Book__Type_book___3C69FB99" FromRole="Type_book" ToRole="Book" />
+  </EntityType>
+  <Association Name="FK__Accountin__Book___403A8C7D">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID_b" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="Book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Accountin__Clien__412EB0B6">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID_c" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="Client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__Author_id__3D5E1FD2">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="ID_a" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__Type_book___3C69FB99">
+    <End Role="Type_book" Type="Self.Type_book" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type_book">
+        <PropertyRef Name="ID_t" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Type_book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseLibEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounting" EntityType="Self.Accounting" />
+    <EntitySet Name="Author" EntityType="Self.Author" />
+    <EntitySet Name="Book" EntityType="Self.Book" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Type_book" EntityType="Self.Type_book" />
+    <AssociationSet Name="FK__Accountin__Book___403A8C7D" Association="Self.FK__Accountin__Book___403A8C7D">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Accounting" EntitySet="Accounting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Accountin__Clien__412EB0B6" Association="Self.FK__Accountin__Clien__412EB0B6">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Accounting" EntitySet="Accounting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__Author_id__3D5E1FD2" Association="Self.FK__Book__Author_id__3D5E1FD2">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__Type_book___3C69FB99" Association="Self.FK__Book__Type_book___3C69FB99">
+      <End Role="Type_book" EntitySet="Type_book" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
