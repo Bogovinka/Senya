@@ -31,17 +31,23 @@ namespace Library
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Accounting book = bookDG.SelectedItem as Accounting;
-            Accounting newAc = new Accounting
+            int idBook = Convert.ToInt32(((Button)sender).Tag);
+            if (db.Accounting.Where(x => x.Client_id == idC && x.Book_id == idBook).Count() == 0)
             {
-                Book_id = Convert.ToInt32(((Button)sender).Tag),
-                Client_id = idC,
-                Date_a = DateTime.Now
-            };
-            db.Accounting.Add(newAc);
-            db.SaveChanges();
-            bookDG.ItemsSource = db.Book.ToList();
-            bookMyDG.ItemsSource = db.Accounting.Where(x => x.Client_id == idC).ToList();
+                Accounting newAc = new Accounting
+                {
+                    Book_id = idBook,
+                    Client_id = idC,
+                    Date_a = DateTime.Now
+                };
+                db.Accounting.Add(newAc);
+                db.SaveChanges();
+                bookDG.ItemsSource = db.Book.ToList();
+                bookMyDG.ItemsSource = db.Accounting.Where(x => x.Client_id == idC).ToList();
+                MessageBox.Show("Книга записана на вас");
+            }
+            else MessageBox.Show("Эта книга уже на вас записанна");
+          
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

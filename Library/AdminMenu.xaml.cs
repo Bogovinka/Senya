@@ -28,10 +28,12 @@ namespace Library
 
         private void SaveB_Click(object sender, RoutedEventArgs e)
         {
-            Accounting ac = bookMyDG.SelectedItem as Accounting;
-            db.Accounting.Remove(ac);
-            db.SaveChanges();
-            bookMyDG.ItemsSource = db.Accounting.ToList();
+            if(bookMyDG.SelectedItem != null) {
+                Accounting ac = bookMyDG.SelectedItem as Accounting;
+                db.Accounting.Remove(ac);
+                db.SaveChanges();
+                bookMyDG.ItemsSource = db.Accounting.ToList();
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
