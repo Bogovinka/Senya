@@ -90,6 +90,9 @@
     <Compile Include="Accounting.cs">
       <DependentUpon>ModelLib.tt</DependentUpon>
     </Compile>
+    <Compile Include="AddBook.xaml.cs">
+      <DependentUpon>AddBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminMenu.xaml.cs">
       <DependentUpon>AdminMenu.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
     <Compile Include="Type_book.cs">
       <DependentUpon>ModelLib.tt</DependentUpon>
     </Compile>
+    <Page Include="AddBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

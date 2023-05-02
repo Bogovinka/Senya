@@ -7,16 +7,38 @@
         mc:Ignorable="d"
         Title="AdminMenu" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Margin="0,0,0,50" IsReadOnly="True" x:Name="bookMyDG" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.FullName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Номер телефона клиента" Binding="{Binding Client.Phone}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Название книги" Binding="{Binding Book.Name_b}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Жанр" Binding="{Binding Book.Type_book.Name_t}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Автор" Binding="{Binding Book.Author.Name_a}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата получения" Binding="{Binding Date_a}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Margin="0,0,0,5" HorizontalAlignment="Center" x:Name="SaveB" VerticalAlignment="Bottom" Click="SaveB_Click">Вернул</Button>
+        <TabControl>
+            <TabItem Header="Учет клиентов">
+                <Grid>
+                    <DataGrid Margin="0,0,0,50" IsReadOnly="True" x:Name="bookMyDG" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Client.FullName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Номер телефона клиента" Binding="{Binding Client.Phone}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Название книги" Binding="{Binding Book.Name_b}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Жанр" Binding="{Binding Book.Type_book.Name_t}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Автор" Binding="{Binding Book.Author.Name_a}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата получения" Binding="{Binding Date_a}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Margin="0,0,0,5" HorizontalAlignment="Center" x:Name="SaveB" VerticalAlignment="Bottom" Click="SaveB_Click">Вернул</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Книги">
+                <Grid>
+                    <DataGrid Margin="0,0,0,50" x:Name="booksDG" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name_b}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Жанр" Binding="{Binding Type_book.Name_t}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Автор" Binding="{Binding Author.Name_a}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Margin="0,0,0,5" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Bottom">
+                        <Button Click="addBook_Click" x:Name="addBook" Margin="0,0,10,0">Добавить</Button>
+                        <Button Click="editBook_Click" x:Name="editBook" Margin="0,0,10,0">Изменить</Button>
+                        <Button Click="delBook_Click" x:Name="delBook">Удалить</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

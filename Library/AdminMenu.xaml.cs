@@ -24,6 +24,7 @@ namespace Library
         {
             InitializeComponent();
             bookMyDG.ItemsSource = db.Accounting.ToList();
+            booksDG.ItemsSource = db.Book.ToList();
         }
 
         private void SaveB_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,59 @@ namespace Library
                 MainWindow mw = new MainWindow();
                 mw.Show();
                 Close();
+            }
+        }
+
+        private void addBook_Click(object sender, RoutedEventArgs e)
+        {
+            AddBook b = new AddBook();
+            if(b.ShowDialog() == true)
+            {
+                Book book = new Book()
+                {
+                    Name_b = b.nameT.Text,
+                    Type_book = db.Type_book.Where(x => x.ID_t == (int)b.TypeT.SelectedValue).FirstOrDefault(),
+                    Type_book_id = (int)b.TypeT.SelectedValue,
+                    Author = db.Author.Where(x => x.ID_a == (int)b.AuthorT.SelectedValue).FirstOrDefault(),
+                    Author_id = (int)b.AuthorT.SelectedValue
+                };
+                db.Book.Add(book);
+                db.SaveChanges();
+                booksDG.ItemsSource = db.Book.ToList();
+            }
+        }
+
+        private void editBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (booksDG.SelectedItem != null)
+            {
+                Book book = (Book)booksDG.SelectedItem;
+                AddBook b = new AddBook(book);
+                if (b.ShowDialog() == true)
+                {
+                    book.Name_b = b.nameT.Text;
+                    book.Type_book = db.Type_book.Where(x => x.ID_t == (int)b.TypeT.SelectedValue).FirstOrDefault();
+                    book.Type_book_id = (int)b.TypeT.SelectedValue;
+                    book.Author = db.Author.Where(x => x.ID_a == (int)b.AuthorT.SelectedValue).FirstOrDefault();
+                    book.Author_id = (int)b.AuthorT.SelectedValue;
+                    db.SaveChanges();
+                    booksDG.ItemsSource = db.Book.ToList();
+                }
+            }
+        }
+
+        private void delBook_Click(object sender, RoutedEventArgs e)
+        {
+            if(booksDG.SelectedItem != null)
+            {
+                Book b = (Book)booksDG.SelectedItem;
+                if (db.Accounting.Where(x => x.Book_id == b.ID_b).Count() == 0)
+                {
+                    db.Book.Remove(b);
+                    db.SaveChanges();
+                    booksDG.ItemsSource = db.Book.ToList();
+                }
+                else MessageBox.Show("Эту книгу не вернул клиент");
             }
         }
     }
